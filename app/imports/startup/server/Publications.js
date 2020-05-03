@@ -23,7 +23,6 @@ Meteor.publish('StuffAdmin', function publish() {
 Meteor.publish(null, function () {
   if (this.userId) {
     return Meteor.roleAssignment.find({ 'user._id': this.userId });
-  } else {
-    this.ready()
   }
+  return this.ready();
 });

@@ -12,7 +12,7 @@ function createUser(email, password, role) {
     password: password,
   });
   if (role) {
-    Roles.createRole(role, {unlessExists: true});
+    Roles.createRole(role, { unlessExists: true });
     Roles.addUsersToRoles(userID, role);
   }
 }
