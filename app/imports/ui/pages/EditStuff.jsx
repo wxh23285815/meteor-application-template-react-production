@@ -6,7 +6,8 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
-import { Stuffs, StuffSchema } from '../../api/stuff/Stuff';
+import { Stuffs } from '../../api/stuff/StuffCollection';
+import { stuffUpdateMethod } from '../../api/stuff/StuffCollection.methods';
 
 /** Renders the Page for editing a single document. */
 class EditStuff extends React.Component {
@@ -14,7 +15,13 @@ class EditStuff extends React.Component {
   /** On successful submit, insert the data. */
   submit(data) {
     const { name, quantity, condition, _id } = data;
-    Stuffs.update(_id, { $set: { name, quantity, condition } }, (error) => (error ?
+    const updateData = {
+      id: _id,
+      name,
+      quantity,
+      condition,
+    };
+    stuffUpdateMethod.call(updateData, (error) => (error ?
       swal('Error', error.message, 'error') :
       swal('Success', 'Item updated successfully', 'success')));
   }
@@ -30,7 +37,7 @@ class EditStuff extends React.Component {
         <Grid container centered>
           <Grid.Column>
             <Header as="h2" textAlign="center">Edit Stuff</Header>
-            <AutoForm schema={StuffSchema} onSubmit={data => this.submit(data)} model={this.props.doc}>
+            <AutoForm schema={Stuffs.getSchema()} onSubmit={data => this.submit(data)} model={this.props.doc}>
               <Segment>
                 <TextField name='name'/>
                 <NumField name='quantity' decimal={false}/>
