@@ -26,6 +26,7 @@
     "babel-eslint": "^10.1.0",
     "chai": "^4.2.0",
     "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",
     "eslint-plugin-import": "^2.20.2",
@@ -43,6 +44,7 @@
     "start": "cross-env METEOR_NO_RELEASE_CHECK=1 meteor --settings ../config/settings.development.json",
     "lint": "eslint --quiet --ext .jsx --ext .js ./imports",
     "pretest": "npm run lint",
-    "test": "cross-env METEOR_NO_RELEASE_CHECK=1 TEST_BROWSER_DRIVER=puppeteer meteor test --once --driver-package meteortesting:mocha"
+    "test": "cross-env METEOR_NO_RELEASE_CHECK=1 TEST_BROWSER_DRIVER=puppeteer meteor test --once --driver-package meteortesting:mocha --port 3100",
+    "test-no-lint": "cross-env METEOR_NO_RELEASE_CHECK=1 TEST_BROWSER_DRIVER=puppeteer meteor test --once --driver-package meteortesting:mocha --port 3100"
   }
 }
