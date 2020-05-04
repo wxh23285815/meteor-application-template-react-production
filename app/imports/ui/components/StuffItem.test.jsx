@@ -5,7 +5,6 @@ import { configure, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { expect } from 'chai';
 import faker from 'faker';
-// import { Table } from 'semantic-ui-react';
 import StuffItem from './StuffItem';
 import { stuffConditions } from '../../api/stuff/StuffCollection';
 
