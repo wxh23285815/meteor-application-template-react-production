@@ -5,6 +5,7 @@
     "@babel/runtime": "^7.9.6",
     "classnames": "^2.2.6",
     "core-js": "^3.6.5",
+    "cross-env": "^7.0.2",
     "graphql": "^15.0.0",
     "meteor-node-stubs": "^1.0.0",
     "prop-types": "^15.7.2",
@@ -35,10 +36,13 @@
     "eslint-utils": "^2.0.0",
     "faker": "^4.1.0",
     "fast-check": "^1.24.2",
+    "puppeteer": "^3.0.2",
     "sinon": "^9.0.2"
   },
   "scripts": {
-    "start": "meteor --no-release-check --settings ../config/settings.development.json",
-    "lint": "eslint --quiet --ext .jsx --ext .js ./imports"
+    "start": "cross-env METEOR_NO_RELEASE_CHECK=1 meteor --settings ../config/settings.development.json",
+    "lint": "eslint --quiet --ext .jsx --ext .js ./imports",
+    "pretest": "npm run lint",
+    "test": "cross-env METEOR_NO_RELEASE_CHECK=1 TEST_BROWSER_DRIVER=puppeteer meteor test --once --driver-package meteortesting:mocha"
   }
 }

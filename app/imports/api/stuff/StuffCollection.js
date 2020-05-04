@@ -1,6 +1,9 @@
 import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
+import { _ } from 'meteor/underscore';
 import BaseCollection from '../base/BaseCollection';
+
+export const stuffConditions = ['excellent', 'good', 'fair', 'poor'];
 
 class StuffCollection extends BaseCollection {
   constructor() {
@@ -10,7 +13,7 @@ class StuffCollection extends BaseCollection {
       owner: String,
       condition: {
         type: String,
-        allowedValues: ['excellent', 'good', 'fair', 'poor'],
+        allowedValues: stuffConditions,
         defaultValue: 'good',
       },
     }));
@@ -39,14 +42,15 @@ class StuffCollection extends BaseCollection {
    * @param docID the id of the document to update.
    * @param name the new name (optional).
    * @param quantity the new quantity (optional).
-   * @param condition the new condiion (optional).
+   * @param condition the new condition (optional).
    */
   update(docID, { name, quantity, condition }) {
     const updateData = {};
     if (name) {
       updateData.name = name;
     }
-    if (quantity) {
+    // if (quantity) { NOTE: 0 is falsy so we need to check if the quantity is a number.
+    if (_.isNumber(quantity)) {
       updateData.quantity = quantity;
     }
     if (condition) {

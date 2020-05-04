@@ -31,8 +31,6 @@ underscore@1.0.10                # http://underscorejs.org/
 ejson@1.1.1                      # https://docs.meteor.com/api/ejson.html
 alanning:roles                   # https://github.com/Meteor-Community-Packages/meteor-roles
 
-# Prototyping only
-
 mdg:validated-method
 didericis:callpromise-mixin
 meteortesting:mocha
