@@ -35,3 +35,6 @@ alanning:roles                   # https://github.com/Meteor-Community-Packages/
 
 mdg:validated-method
 didericis:callpromise-mixin
+meteortesting:mocha
+xolvio:cleaner
+dburles:factory
