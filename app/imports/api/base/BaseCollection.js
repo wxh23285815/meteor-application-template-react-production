@@ -163,6 +163,7 @@ class BaseCollection {
   subscribe() {
     if (Meteor.isClient) {
       Meteor.subscribe(this._collectionName);
+      Meteor.subscribe('Stuff');
     }
   }
 }

@@ -15,7 +15,9 @@ export const stuffDefineMethod = new ValidatedMethod({
   validate: null,
   run(definitionData) {
     if (Meteor.isServer) {
-      return Stuffs.define(definitionData);
+      const docID = Stuffs.define(definitionData);
+      // console.log(`stuffDefineMethod returning ${docID}. Now have ${Stuffs.count()}`);
+      return docID;
     }
     return '';
   },
