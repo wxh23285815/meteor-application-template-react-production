@@ -10,7 +10,7 @@ import { Stuffs } from '../api/stuff/StuffCollection';
 export function withSubscriptions() {
   return new Promise((resolve => {
     // Add the collections to subscribe to.
-    Stuffs.subscribe();
+    Stuffs.subscribeStuff();
     const poll = Meteor.setInterval(() => {
       if (DDP._allSubscriptionsReady()) {
         Meteor.clearInterval(poll);

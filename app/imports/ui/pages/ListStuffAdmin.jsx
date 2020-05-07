@@ -45,8 +45,8 @@ ListStuffAdmin.propTypes = {
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
 export default withTracker(() => {
+  const subscription = Stuffs.subscribeStuffAdmin();
   // Get access to Stuff documents.
-  const subscription = Meteor.subscribe('StuffAdmin');
   return {
     stuffs: Stuffs.find({}).fetch(),
     ready: subscription.ready(),

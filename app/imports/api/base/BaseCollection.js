@@ -5,13 +5,13 @@ import { _ } from 'meteor/underscore';
 class BaseCollection {
   /**
    * Superclass constructor for all meteor-application-template-react-production entities.
-   * Defines internal fields needed by all entities: _name, _collectionName, _collection, and _schema.
+   * Defines internal fields needed by all entities: _type, _collectionName, _collection, and _schema.
    * @param {String} type The name of the entity defined by the subclass.
    * @param {SimpleSchema} schema The schema for validating fields on insertion to the DB.
    */
   constructor(type, schema) {
-    this._name = type;
-    this._collectionName = `${type}Collection`;
+    this._type = type;
+    this._collectionName = `${this._type}Collection`;
     this._collection = new Mongo.Collection(this._collectionName);
     this._schema = schema;
     this._collection.attachSchema(this._schema);
@@ -100,11 +100,11 @@ class BaseCollection {
   }
 
   /**
-   * Return the name of this collection.
+   * Return the type of this collection.
    * @returns { String } The type, as a string.
    */
-  getName() {
-    return this._name;
+  getType() {
+    return this._type;
   }
 
   /**
@@ -148,7 +148,7 @@ class BaseCollection {
 
   /**
    * Default publication method for entities.
-   * It publishes the entire collection.
+   * It publishes the entire collection. This should be overridden in subclasses.
    */
   publish() {
     if (Meteor.isServer) {
@@ -158,12 +158,11 @@ class BaseCollection {
 
   /**
    * Default subscription method for entities.
-   * It subscribes to the entire collection.
+   * It subscribes to the entire collection. Should be overridden in subclass
    */
   subscribe() {
     if (Meteor.isClient) {
       Meteor.subscribe(this._collectionName);
-      Meteor.subscribe('Stuff');
     }
   }
 }
