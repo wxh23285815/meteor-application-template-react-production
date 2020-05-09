@@ -64,8 +64,9 @@ export default withTracker(({ match }) => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   const documentId = match.params._id;
   // Get access to Stuff documents.
+  const subscription = Stuffs.subscribeStuff();
   return {
     doc: Stuffs.findOne(documentId),
-    ready: Stuffs.subscribeStuff(),
+    ready: subscription.ready(),
   };
 })(EditStuff);
