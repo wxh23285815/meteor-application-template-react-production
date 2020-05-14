@@ -18,20 +18,24 @@ const formSchema = new SimpleSchema({
   },
 });
 
-/** Renders the Page for adding a document. */
+/** Renders the Page for adding stuff. */
 class AddStuff extends React.Component {
 
   /** On submit, insert the data. */
   submit(data, formRef) {
+    // console.log('AddStuff.submit', data);
     const { name, quantity, condition } = data;
     const owner = Meteor.user().username;
+    // console.log(`{ ${name}, ${quantity}, ${condition}, ${owner} }`);
     stuffDefineMethod.call({ name, quantity, condition, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
+          // console.error(error.message);
         } else {
           swal('Success', 'Item added successfully', 'success');
           formRef.reset();
+          // console.log('Success');
         }
       });
   }

@@ -14,6 +14,7 @@ export const stuffDefineMethod = new ValidatedMethod({
   mixins: [CallPromiseMixin],
   validate: null,
   run(definitionData) {
+    // console.log('stuffDefineMethod', definitionData);
     if (Meteor.isServer) {
       const docID = Stuffs.define(definitionData);
       // console.log(`stuffDefineMethod returning ${docID}. Now have ${Stuffs.count()}`);
