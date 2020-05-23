@@ -1,8 +1,7 @@
-import { loginAsJohn } from '../login-helpers';
-
 describe('List Stuff Page', () => {
   it('list john\'s Stuff', () => {
-    loginAsJohn(cy)
+    // loginAsJohn(cy)
+    cy.login('john@foo.com', 'changeme')
     cy.contains('List Stuff').click()
     cy.url().should('include', 'list')
     cy.get('tbody tr')

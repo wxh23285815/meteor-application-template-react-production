@@ -1,5 +1,3 @@
-import { loginAsAdmin, loginAsJohn } from '../login-helpers';
-
 describe('The Home Page', () => {
   it('successfully loads', () => {
     cy.visit('/')
@@ -7,13 +5,13 @@ describe('The Home Page', () => {
     cy.contains('Login')
   })
   it('can login as john', () => {
-    loginAsJohn(cy)
+    cy.login('john@foo.com', 'changeme')
     cy.contains('Add Stuff')
     cy.contains('List Stuff')
     cy.contains('john@foo.com')
   })
   it('can login as admin', () => {
-    loginAsAdmin(cy)
+    cy.login('admin@foo.com', 'changeme')
     cy.contains('Add Stuff')
     cy.contains('List Stuff')
     cy.contains('Admin')
