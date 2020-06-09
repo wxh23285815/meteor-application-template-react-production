@@ -6,6 +6,10 @@ import { Roles } from 'meteor/alanning:roles';
 import BaseCollection from '../base/BaseCollection';
 
 export const stuffConditions = ['excellent', 'good', 'fair', 'poor'];
+export const stuffPublications = {
+  stuff: 'Stuff',
+  stuffAdmin: 'StuffAdmin',
+};
 
 class StuffCollection extends BaseCollection {
   constructor() {
@@ -82,7 +86,7 @@ class StuffCollection extends BaseCollection {
       // get the StuffCollection instance.
       const instance = this;
       /** This subscription publishes only the documents associated with the logged in user */
-      Meteor.publish('Stuff', function publish() {
+      Meteor.publish(stuffPublications.stuff, function publish() {
         if (this.userId) {
           const username = Meteor.users.findOne(this.userId).username;
           return instance._collection.find({ owner: username });
@@ -91,7 +95,7 @@ class StuffCollection extends BaseCollection {
       });
 
       /** This subscription publishes all documents regardless of user, but only if the logged in user is the Admin. */
-      Meteor.publish('StuffAdmin', function publish() {
+      Meteor.publish(stuffPublications.stuffAdmin, function publish() {
         if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
           return instance._collection.find();
         }
@@ -105,7 +109,7 @@ class StuffCollection extends BaseCollection {
    */
   subscribeStuff() {
     if (Meteor.isClient) {
-      return Meteor.subscribe('Stuff');
+      return Meteor.subscribe(stuffPublications.stuff);
     }
     return null;
   }
@@ -116,7 +120,7 @@ class StuffCollection extends BaseCollection {
    */
   subscribeStuffAdmin() {
     if (Meteor.isClient) {
-      return Meteor.subscribe('StuffAdmin');
+      return Meteor.subscribe(stuffPublications.stuffAdmin);
     }
     return null;
   }
